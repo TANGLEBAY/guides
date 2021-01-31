@@ -2,7 +2,7 @@ Hier findet ihr nun eine Auflistung aller genutzten Befehle des Videos zur Einri
 
 **1. Benutzer anlegen**
 ```
-sudo useradd -s /bin/bash -m
+sudo useradd -s /bin/bash -m hornet
 ```
 
 **2. Pakete installieren**
