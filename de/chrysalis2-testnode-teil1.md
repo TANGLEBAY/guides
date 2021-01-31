@@ -124,7 +124,7 @@ nano config_chrysalis_testnet.json
 
 **17. Start-konfigurationsdatei für Hornet erzeugen**
 ```
-nano /etc/defaults/hornet
+nano /etc/default/hornet
 ```
 
 **18. Inhalt in die Start-konfigurationsdatei festlegen**
