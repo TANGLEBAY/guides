@@ -68,7 +68,7 @@ Group=hornet
 WorkingDirectory=/var/lib/hornet
 TimeoutSec=1200
 Restart=always
-ExecStart=/var/lib/hornet $OPTIONS
+ExecStart=/var/lib/hornet/hornet $OPTIONS
 
 [Install]
 WantedBy=multi-user.target
