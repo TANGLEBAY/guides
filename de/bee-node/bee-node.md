@@ -96,7 +96,7 @@ WantedBy=multi-user.target```
 ```sudo certbot --nginx -d node.meinedomain.de```
 
 # Nginx Konfiguration ersetzen
-```sudo rm -rf /etc/nginx/sites-enabled/default && sudo wget URL -O /etc/nginx/sites-enabled/default```
+```sudo rm -rf /etc/nginx/sites-enabled/default && sudo wget https://raw.githubusercontent.com/TANGLEBAY/tutorials/master/de/bee-node/nginx.template -O /etc/nginx/sites-enabled/default```
 
 # Nginx Konfiguration bearbeiten
 ```sudo nano /etc/nginx/sites-enabled/default```
