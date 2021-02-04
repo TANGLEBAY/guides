@@ -54,9 +54,6 @@
 # Bee-User verlassen
 `STRG+D` oder `exit` ins Terminal
 
-# Service anlegen
-```nano /lib/systemd/system/bee.service```
-
 # Servicedatei kopieren
 ```sudo wget https://raw.githubusercontent.com/TANGLEBAY/tutorials/master/de/bee-node/bee.service -O /lib/systemd/system/bee.service```
 
