@@ -57,31 +57,8 @@
 # Service anlegen
 ```nano /lib/systemd/system/bee.service```
 
-# Inhalt in die Servicedatei kopieren
-```[Unit]
-Description=Bee
-Wants=network-online.target
-After=network-online.target
-
-[Service]
-LimitNOFILE=4096
-StandardOutput=syslog
-StandardError=syslog
-SyslogIdentifier=bee
-PrivateDevices=yes
-PrivateTmp=yes
-ProtectSystem=full
-ProtectHome=yes
-
-User=bee
-Group=bee
-WorkingDirectory=/var/lib/bee/target/release
-TimeoutSec=1200
-Restart=always
-ExecStart=/var/lib/bee/target/release/bee
-
-[Install]
-WantedBy=multi-user.target```
+# Servicedatei kopieren
+```sudo wget https://raw.githubusercontent.com/TANGLEBAY/tutorials/master/de/bee-node/bee.service -O /lib/systemd/system/bee.service```
 
 # Daemon neu laden
 ```sudo systemctl daemon-reload```
