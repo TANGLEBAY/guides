@@ -50,15 +50,6 @@ server {
                 }
         }
 
-        location /branding {
-                auth_basic off;
-                proxy_pass http://localhost:8081/branding;
-                proxy_set_header        Host $host;
-                proxy_set_header        X-Real-IP $remote_addr;
-                proxy_set_header        X-Forwarded-Proto $scheme;
-                proxy_set_header        X-Real-SslId $ssl_session_id;
-        }
-
         location /ws {
                 proxy_pass http://localhost:8081/ws;
                 proxy_http_version 1.1;
