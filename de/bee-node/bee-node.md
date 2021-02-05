@@ -1,4 +1,5 @@
 **Befehlsübersicht zur Einrichtung einer Bee Node**
+Video-Anleitung: https://www.youtube.com/watch?v=ZgPuhUTPeiw
 
 **1. Benutzer bee erstellen**
 ```
