@@ -127,7 +127,7 @@ sudo nano /etc/nginx/sites-enabled/default
 
 **26. Create htpasswd file**
 ```
-sudo htpasswd -c /etc/nginx/.htpasswd
+sudo htpasswd -Bc /etc/nginx/.htpasswd
 ```
 
 **27. Restart nginx**
