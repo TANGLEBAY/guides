@@ -1,5 +1,6 @@
 **Command list to install a bee node**
-YouTube: 
+
+YouTube: https://www.youtube.com/watch?v=jC1PKj--lpg
 
 **1. Create the user bee**
 ```
@@ -10,7 +11,6 @@ sudo useradd -s /bin/bash -m bee
 ```
 sudo apt install git npm build-essential cmake pkg-config librocksdb-dev llvm clang libclang-dev libssl-dev apache2-utils software-properties-common certbot python3-certbot-nginx -y
 ```
-
 
 **3. Clone the repository**
 ```
@@ -29,7 +29,7 @@ sudo chown -R bee:bee /var/lib/bee
 
 **6. Switch user to bee**
 ```
-su bee
+sudo su bee
 ```
 
 **7. Install rust**

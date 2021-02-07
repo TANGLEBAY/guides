@@ -12,7 +12,6 @@ sudo useradd -s /bin/bash -m bee
 sudo apt install git npm build-essential cmake pkg-config librocksdb-dev llvm clang libclang-dev libssl-dev apache2-utils software-properties-common certbot python3-certbot-nginx -y
 ```
 
-
 **3. Repo klonen**
 ```
 sudo git clone https://github.com/iotaledger/bee.git --branch chrysalis-pt-2 /var/lib/bee
@@ -30,7 +29,7 @@ sudo chown -R bee:bee /var/lib/bee
 
 **6. Benutzer wechseln**
 ```
-su bee
+sudo su bee
 ```
 
 **7. Rust installieren**
@@ -85,7 +84,7 @@ cd /var/lib/bee/target/release
 
 **17. P2P private key kopiere und in config.toml einfügen & Nachbarn hinzufügen**
 ```
-nano config.toml
+sudo nano config.toml
 ```
 
 **18. Bee-User verlassen**
