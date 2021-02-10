@@ -84,7 +84,7 @@ cd /var/lib/bee/target/release
 
 **17. P2P private key kopiere und in config.toml einfügen & Nachbarn hinzufügen**
 ```
-sudo nano config.toml
+nano config.toml
 ```
 
 **18. Bee-User verlassen**
