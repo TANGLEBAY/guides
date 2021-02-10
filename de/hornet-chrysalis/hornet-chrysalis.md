@@ -7,12 +7,12 @@ sudo useradd -s /bin/bash -m hornet
 
 **2. Pakete installieren**
 ```
-apt install build-essential git snapd -y
+sudo apt update && sudo apt install build-essential git snapd -y
 ```
 
 **3. GO installieren**
 ```
-snap install go --classic
+sudo snap install go --classic
 ```
 
 **4. Hornet repository clonen**
@@ -37,12 +37,12 @@ go build -o hornet
 
 **8. Dateireche ändern**
 ```
-chown -R hornet:hornet /var/lib/hornet
+sudo chown -R hornet:hornet /var/lib/hornet
 ```
 
 **9. Hornet Service erstellen**
 ```
-nano /lib/systemd/system/hornet.service
+sudo nano /lib/systemd/system/hornet.service
 ```
 
 **10. Servicekonfiguration kopieren**
@@ -76,17 +76,17 @@ WantedBy=multi-user.target
 
 **11. System Daemon neu laden**
 ```
-systemctl daemon-reload
+sudo systemctl daemon-reload
 ```
 
 **12. Hornet Service aktivieren**
 ```
-systemctl enable hornet
+sudo systemctl enable hornet
 ```
 
 **13. Peering.json öffnen**
 ```
-nano peering.json
+sudo nano peering.json
 ```
 
 **14. Nachbarn in der Peering.json eintragen**
@@ -105,7 +105,7 @@ nano peering.json
 
 **15. (OPTIONAL) Dashboard erreichbar machen**
 ```
-nano config_chrysalis_testnet.json
+sudo nano config_chrysalis_testnet.json
 ```
 
 **16. (OPTIONAL) bindAddress für das Dashboard ändern**
@@ -124,7 +124,7 @@ nano config_chrysalis_testnet.json
 
 **17. Start-konfigurationsdatei für Hornet erzeugen**
 ```
-nano /etc/default/hornet
+sudo nano /etc/default/hornet
 ```
 
 **18. Inhalt in die Start-konfigurationsdatei festlegen**
@@ -134,12 +134,12 @@ OPTIONS="--config config_chrysalis_testnet.json"
 
 **19. Hornet starten**
 ```
-systemctl start hornet
+sudo systemctl start hornet
 ```
 
 **20. Log anschauen**
 ```
-journalctl -fu hornet
+sudo journalctl -fu hornet
 ```
 
 **21. Dashboard aufrufen**
