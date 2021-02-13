@@ -8,23 +8,20 @@ if [ "$status" != "active" ]; then
     checkbee=$(git pull)
     if [ "$checkbee" = "Already up to date." ]; then
         cd /var/lib/bee/bee-node
-        git submodule update --init &&
+        git submodule update --init
         cd /var/lib/bee/bee-node/src/plugins/dashboard/frontend
-        npm install &&
-        npm run build-bee &&
+        npm install
+        npm run build-bee
         cd /var/lib/bee/bee-node
-        rm -rf /var/lib/bee/target/release/storage/alphanet/* &&
-        rm -rf /var/lib/bee/target/release/snapshots/alphanet/* &&
-        cargo build --release --features dashboard &&
-        cp -r /var/lib/bee/target/release/config.toml /var/lib/bee/target/release/config.toml.bak &&
-        cp -r /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml &&
-        clear
+        cargo build --release --features dashboard
+        rm -rf /var/lib/bee/target/release/storage/alphanet /var/lib/bee/target/release/snapshots/alphanet
+        mv /var/lib/bee/target/release/config.toml /var/lib/bee/target/release/config.toml.bak
+        cp -r /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml
         echo ""
         echo -e $red "Bearbeite die ALTE Konfiguration um den private Key & die Nachbarn zu kopieren..."
         echo ""
         read -n1 -s -r -p $'Drücke eine beliebige Taste um forzufahren...\n'
         nano /var/lib/bee/target/release/config.toml.bak
-        clear
         echo ""
         echo -e $red "Bearbeite die neue Konfiguration..."
         echo ""
