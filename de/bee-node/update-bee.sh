@@ -20,12 +20,12 @@ if [ "$status" != "active" ]; then
         echo ""
         echo -e $red "Bearbeite die ALTE Konfiguration um den private Key & die Nachbarn zu kopieren..."
         echo ""
-        read -n1 -s -r -p $'Drücke eine beliebige Taste um forzufahren...\n'
+        read -p "Drücke eine beliebige Taste um forzufahren..."
         nano /var/lib/bee/target/release/config.toml.bak
         echo ""
         echo -e $red "Bearbeite die neue Konfiguration..."
         echo ""
-        read -n1 -s -r -p $'Drücke eine beliebige Taste um forzufahren...\n'
+        read -p "Drücke eine beliebige Taste um forzufahren..."
         nano /var/lib/bee/target/release/config.toml
         echo ""
         echo -e $red "Bee erfolgreich aktualisiert!" $nc
