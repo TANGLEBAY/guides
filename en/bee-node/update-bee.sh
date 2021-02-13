@@ -6,7 +6,7 @@ status="$(systemctl show -p ActiveState --value bee)"
 if [ "$status" != "active" ]; then
     cd /var/lib/bee
     checkbee=$(git pull)
-    if [ "$checkbee" != "Already up to date." ]; then
+    if [ "$checkbee" = "Already up to date." ]; then
         cd /var/lib/bee/bee-node
         git submodule update --init &&
         cd /var/lib/bee/bee-node/src/plugins/dashboard/frontend
@@ -16,19 +16,19 @@ if [ "$status" != "active" ]; then
         rm -rf /var/lib/bee/target/release/storage/alphanet/* &&
         rm -rf /var/lib/bee/target/release/snapshots/alphanet/* &&
         cargo build --release --features dashboard &&
-        mv /var/lib/bee/target/release/config.toml /var/lib/bee/target/release/config.toml.bak &&
-        cp /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml &&
+        cp -r /var/lib/bee/target/release/config.toml /var/lib/bee/target/release/config.toml.bak &&
+        cp -r /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml &&
         clear
         echo ""
         echo -e $red "Edit OLD configuration to copy private key & neighbors..."
         echo ""
-        read -n1 -s -r -p $'Press any key to continue...\n' key
+        read -n1 -s -r -p $'Press any key to continue...\n'
         nano /var/lib/bee/target/release/config.toml.bak
         clear
         echo ""
         echo -e $red "Edit NEW configuration..."
         echo ""
-        read -n1 -s -r -p $'Press any key to continue...\n' key
+        read -n1 -s -r -p $'Press any key to continue...\n'
         nano /var/lib/bee/target/release/config.toml
         echo ""
         echo -e $red "Updating finished!" $nc
