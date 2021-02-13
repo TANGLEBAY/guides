@@ -16,19 +16,19 @@ if [ "$status" != "active" ]; then
         rm -rf /var/lib/bee/target/release/storage/alphanet/* &&
         rm -rf /var/lib/bee/target/release/snapshots/alphanet/* &&
         cargo build --release --features dashboard &&
-        mv /var/lib/bee/target/release/config.toml /var/lib/bee/target/release/config.toml.bak &&
-        cp /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml &&
+        cp -r /var/lib/bee/target/release/config.toml /var/lib/bee/target/release/config.toml.bak &&
+        cp -r /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml &&
         clear
         echo ""
         echo -e $red "Edit OLD configuration to copy private key & neighbors..."
         echo ""
-        read -n1 -s -r -p $'Press any key to continue...\n' key
+        read -n1 -s -r -p $'Press any key to continue...\n'
         nano /var/lib/bee/target/release/config.toml.bak
         clear
         echo ""
         echo -e $red "Edit NEW configuration..."
         echo ""
-        read -n1 -s -r -p $'Press any key to continue...\n' key
+        read -n1 -s -r -p $'Press any key to continue...\n'
         nano /var/lib/bee/target/release/config.toml
         echo ""
         echo -e $red "Updating finished!" $nc
