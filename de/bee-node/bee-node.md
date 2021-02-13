@@ -134,3 +134,8 @@ sudo htpasswd -c /etc/nginx/.htpasswd
 ```
 sudo systemctl restart nginx
 ```
+
+# Update Bee
+```
+curl -sL https://raw.githubusercontent.com/TANGLEBAY/tutorials/master/de/bee-node/update-bee.sh | bash -
+```

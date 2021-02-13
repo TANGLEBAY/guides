@@ -6,7 +6,7 @@ status="$(systemctl show -p ActiveState --value bee)"
 if [ "$status" != "active" ]; then
     cd /var/lib/bee
     checkbee=$(git pull)
-    if [ "$checkbee" != "Already up to date." ]; then
+    if [ "$checkbee" = "Already up to date." ]; then
         cd /var/lib/bee/bee-node
         git submodule update --init &&
         cd /var/lib/bee/bee-node/src/plugins/dashboard/frontend
@@ -35,10 +35,14 @@ if [ "$status" != "active" ]; then
         echo ""
         echo -e $red "Updating finished!" $nc
     else
+        echo ""
         echo -e $red "Bee already up2date!" $nc
+        echo ""
     fi
 else
+    echo ""
     echo -e $red "Please stop the bee node before updating!" $nc
+    echo ""
 fi
 
 exit 0
