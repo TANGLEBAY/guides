@@ -1,6 +1,8 @@
-**Befehlsübersicht zur Einrichtung einer Bee Node**
+# Befehlsübersicht zur Einrichtung einer Bee Node
 
 Video-Anleitung: https://www.youtube.com/watch?v=ZgPuhUTPeiw
+
+## Bee Installation
 
 **1. Benutzer bee erstellen**
 ```
@@ -135,7 +137,19 @@ sudo htpasswd -c /etc/nginx/.htpasswd
 sudo systemctl restart nginx
 ```
 
-# Update Bee
+## Bee aktualisieren
+
+**1. Stoppe deine bee node**
+```
+sudo systemctl stop bee
+```
+
+**2. Aktualisiere deine Bee node (du musst diesen Befehl mit dem Benutzer Bee ausführen (sudo su bee)!)**
 ```
 curl -sL https://raw.githubusercontent.com/TANGLEBAY/tutorials/master/de/bee-node/update-bee.sh | bash -
+```
+
+**3. Start your bee node**
+```
+sudo systemctl start bee
 ```

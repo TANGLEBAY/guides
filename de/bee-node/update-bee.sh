@@ -17,12 +17,10 @@ if [ "$status" != "active" ]; then
         rm -rf /var/lib/bee/target/release/snapshots/alphanet/* &&
         cargo build --release --features dashboard &&
         mv /var/lib/bee/target/release/config.toml /var/lib/bee/target/release/config.toml.bak &&
-        cp /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml
-        privkey=$(cat /var/lib/bee/target/release/config.toml.bak | grep "identity_private_key")
-        sed -i 's/identity_private_key.*/'$privkey'/' /var/lib/bee/target/release/config.toml
+        cp /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml &&
         clear
         echo ""
-        echo -e $red "Edit OLD configuration to save neighbors..."
+        echo -e $red "Edit OLD configuration to copy private key & neighbors..."
         echo ""
         read -n1 -s -r -p $'Press any key to continue...\n' key
         nano /var/lib/bee/target/release/config.toml.bak

@@ -1,6 +1,8 @@
-**Command list to install a bee node**
+# Command list to install a bee node
 
 YouTube: https://www.youtube.com/watch?v=jC1PKj--lpg
+
+## Install bee
 
 **1. Create the user bee**
 ```
@@ -138,4 +140,21 @@ sudo htpasswd -B /etc/nginx/.htpasswd USERNAME
 **28. Restart nginx**
 ```
 sudo systemctl restart nginx
+```
+
+## Update bee
+
+**1. Stop your bee node**
+```
+sudo systemctl stop bee
+```
+
+**2. Update bee (you need to run this command as user bee (sudo su bee)!)**
+```
+curl -sL https://raw.githubusercontent.com/TANGLEBAY/tutorials/master/en/bee-node/update-bee.sh | bash -
+```
+
+**3. Start your bee node**
+```
+sudo systemctl start bee
 ```
