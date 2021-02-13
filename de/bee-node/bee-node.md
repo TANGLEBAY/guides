@@ -149,7 +149,17 @@ sudo systemctl stop bee
 curl -sL https://raw.githubusercontent.com/TANGLEBAY/tutorials/master/de/bee-node/update-bee.sh | bash -
 ```
 
-**3. Start your bee node**
+**3. Kopiere deinen privaten Key und deine Nachbarn aus der alten Konfiguration**
+```
+nano /var/lib/bee/target/release/config.toml.bak
+```
+
+**4. Füge deine kopierten Daten in die neue Konfiguration ein**
+```
+nano /var/lib/bee/target/release/config.toml
+```
+
+**5. Starte die Bee Node**
 ```
 sudo systemctl start bee
 ```

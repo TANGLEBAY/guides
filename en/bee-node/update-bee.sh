@@ -18,25 +18,15 @@ if [ "$status" != "active" ]; then
         mv /var/lib/bee/target/release/config.toml /var/lib/bee/target/release/config.toml.bak
         cp -r /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml
         echo ""
-        echo -e $red "Bearbeite die ALTE Konfiguration um den private Key & die Nachbarn zu kopieren..."
-        echo ""
-        read -p "Drücke eine beliebige Taste um forzufahren..."
-        nano /var/lib/bee/target/release/config.toml.bak
-        echo ""
-        echo -e $red "Bearbeite die neue Konfiguration..."
-        echo ""
-        read -p "Drücke eine beliebige Taste um forzufahren..."
-        nano /var/lib/bee/target/release/config.toml
-        echo ""
-        echo -e $red "Bee erfolgreich aktualisiert!" $nc
+        echo -e $red "Bee successfully updated!" $nc
     else
         echo ""
-        echo -e $red "Bee ist bereits auf dem neuesten Stand!" $nc
+        echo -e $red "Bee is already up2date!" $nc
         echo ""
     fi
 else
     echo ""
-    echo -e $red "Bitte stoppe zuerst Bee um mit der Aktualisierung fortfahren zu können!" $nc
+    echo -e $red "Please stop Bee first to be able to continue with the update!" $nc
     echo ""
 fi
 
