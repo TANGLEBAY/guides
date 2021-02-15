@@ -22,7 +22,7 @@ if [ "$status" != "active" ]; then
         echo ""
         echo -e $green "Bee successfully updated!" $nc
         echo ""
-        echo -e $red "Dont forget to update your configuration file!"
+        echo -e $red "Dont forget to update your configuration file!" $nc
         echo ""
     else
         echo ""
