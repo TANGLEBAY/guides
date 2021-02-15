@@ -14,14 +14,16 @@ if [ "$user" = "bee" ]; then
             echo -e $yellow "Updating rust..." $nc
             echo ""
             rustup update
-            echo ""
-            echo -e $yellow "Updating the dashboard..." $nc
-            echo ""
-            cd /var/lib/bee/bee-node
-            git submodule update --init
-            cd /var/lib/bee/bee-node/src/plugins/dashboard/frontend
-            npm install
-            npm run build-bee
+            if [ -d "/var/lib/bee/bee-node/src/plugins/dashboard/frontend" ]; then
+                echo ""
+                echo -e $yellow "Updating the dashboard..." $nc
+                echo ""
+                cd /var/lib/bee/bee-node
+                git submodule update --init
+                cd /var/lib/bee/bee-node/src/plugins/dashboard/frontend
+                npm install
+                npm run build-bee
+            fi
             echo ""
             echo -e $yellow "Updating Bee..." $nc
             echo ""
