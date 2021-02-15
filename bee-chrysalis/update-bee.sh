@@ -1,7 +1,7 @@
 #!/bin/bash
 red='\033[1;31m'
-green='\033[1;32'
-yellow='\033[1;33'
+green='\033[1;32m'
+yellow='\033[1;33m'
 nc='\033[0m'
 user=$(whoami)
 if [ "$user" = "bee" ]; then
