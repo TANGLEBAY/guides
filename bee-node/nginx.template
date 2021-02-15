@@ -1,0 +1,96 @@
+server {
+        server_name domain.tld;
+
+        server_tokens off;
+        ssl_session_cache shared:SSL:32m;
+        add_header Strict-Transport-Security 'max-age=63072000; includeSubdomains';
+        add_header X-Content-Type-Options "nosniff";
+        add_header X-XSS-Protection "1; mode=block";
+
+        location /health {
+                auth_basic off;
+                proxy_pass http://localhost:14265/health;
+                proxy_set_header        Host $host;
+                proxy_set_header        X-Real-IP $remote_addr;
+                proxy_set_header        X-Forwarded-Proto $scheme;
+                proxy_set_header        X-Real-SslId $ssl_session_id;
+        }
+
+        location /api {
+                auth_basic off;
+                proxy_pass http://localhost:14265/api;
+                proxy_set_header        Host $host;
+                proxy_set_header        X-Real-IP $remote_addr;
+                proxy_set_header        X-Forwarded-Proto $scheme;
+                proxy_set_header        X-Real-SslId $ssl_session_id;
+
+                if ($request_method = 'OPTIONS') {
+                        add_header 'Access-Control-Allow-Origin' '*';
+                        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+                        add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,Proxy-Authorization,X-IOTA-API-Version';
+                        #
+                        # Tell client that this pre-flight info is valid for 20 days
+                        #
+                        add_header 'Access-Control-Max-Age' 1728000;
+                        add_header 'Content-Type' 'text/plain; charset=utf-8';
+                        add_header 'Content-Length' 0;
+                        return 204;
+                }
+                if ($request_method = 'POST') {
+                        # add_header 'Access-Control-Allow-Origin' '*';
+                        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+                        add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,Proxy-Authorization,X-IOTA-API-Version';
+                        add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range,WWW-Authenticate,Proxy-Authenticate';
+                }
+                if ($request_method = 'GET') {
+                        # add_header 'Access-Control-Allow-Origin' '*';
+                        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+                        add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,Proxy-Authorization,X-IOTA-API-Version';
+                        add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range,WWW-Authenticate,Proxy-Authenticate';
+                }
+        }
+
+        location /branding {
+                auth_basic off;
+                proxy_pass http://localhost:8081/branding;
+                proxy_set_header        Host $host;
+                proxy_set_header        X-Real-IP $remote_addr;
+                proxy_set_header        X-Forwarded-Proto $scheme;
+                proxy_set_header        X-Real-SslId $ssl_session_id;
+        }
+
+        location /ws {
+                proxy_pass http://localhost:8081/ws;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+                proxy_set_header        Host $host;
+                proxy_set_header        X-Real-IP $remote_addr;
+                proxy_set_header        X-Forwarded-Proto $scheme;
+                proxy_set_header        X-Real-SslId $ssl_session_id;
+                proxy_read_timeout 86400;
+        }
+
+        location / {
+                auth_basic "Authentication required";
+                auth_basic_user_file    /etc/nginx/.htpasswd;
+                proxy_pass http://localhost:8081;
+                proxy_set_header        Host $host;
+                proxy_set_header        X-Real-IP $remote_addr;
+                proxy_set_header        X-Forwarded-Proto $scheme;
+                proxy_set_header        X-Real-SslId $ssl_session_id;
+        }
+
+    listen [::]:443 ssl http2 deferred;
+    listen 443 ssl http2 deferred;
+    ssl_certificate /etc/letsencrypt/live/domain.tld/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/domain.tld/privkey.pem;
+}
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
+    server_tokens off;
+    return 301 https://domain.tld$request_uri;
+}
