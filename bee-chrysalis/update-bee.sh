@@ -44,6 +44,8 @@ if [ "$user" = "bee" ]; then
                 echo ""
                 privkey=$(cat /var/lib/bee/target/release/config.toml.bak | grep "identity_private_key")
                 sed -i 's/^.*identity_private_key.*$/'"$privkey"'/' /var/lib/bee/target/release/config.toml
+            else
+                echo -e $yellow "Skipping because of noreset argument..." $nc
             fi
             echo ""
             echo -e $green "Bee successfully updated!" $nc
