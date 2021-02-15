@@ -1,25 +1,26 @@
 [Unit]
-Description=Bee
+Description=Hornet
 Wants=network-online.target
 After=network-online.target
 
 [Service]
+EnvironmentFile=-/etc/default/hornet
 LimitNOFILE=4096
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier=bee
+SyslogIdentifier=hornet
 PrivateDevices=yes
 PrivateTmp=yes
 ProtectSystem=full
 ProtectHome=yes
 
-User=bee
-Group=bee
-WorkingDirectory=/var/lib/bee/target/release
+User=hornet
+Group=hornet
+WorkingDirectory=/var/lib/hornet
 TimeoutSec=1200
 Restart=always
-ExecStart=/var/lib/bee/target/release/bee
+ExecStart=/var/lib/hornet/hornet --config config_chrysalis_testnet.json
 
 [Install]
 WantedBy=multi-user.target
-Alias=bee.service
+Alias=hornet.service
