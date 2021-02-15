@@ -29,20 +29,22 @@ if [ "$user" = "bee" ]; then
             echo ""
             cd /var/lib/bee/bee-node
             cargo build --release --features dashboard
-            echo ""
-            echo -e $yellow "Removing old database and snaphot" $nc
-            echo ""
-            rm -rf /var/lib/bee/target/release/storage /var/lib/bee/target/release/snapshots
-            echo ""
-            echo -e $yellow "Creating backup of bee configuration (/var/lib/bee/target/release/config.toml.bak)..." $nc
-            echo ""
-            mv /var/lib/bee/target/release/config.toml /var/lib/bee/target/release/config.toml.bak
-            cp -r /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml
-            echo ""
-            echo -e $yellow "Adding identity private key to new configuration..." $nc
-            echo ""
-            privkey=$(cat /var/lib/bee/target/release/config.toml.bak | grep "identity_private_key")
-            sed -i 's/^.*identity_private_key.*$/'"$privkey"'/' /var/lib/bee/target/release/config.toml
+            if [ "$1" != "noreset" ]; then
+                echo ""
+                echo -e $yellow "Removing old database and snaphot" $nc
+                echo ""
+                rm -rf /var/lib/bee/target/release/storage /var/lib/bee/target/release/snapshots
+                echo ""
+                echo -e $yellow "Creating backup of bee configuration (/var/lib/bee/target/release/config.toml.bak)..." $nc
+                echo ""
+                mv /var/lib/bee/target/release/config.toml /var/lib/bee/target/release/config.toml.bak
+                cp -r /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml
+                echo ""
+                echo -e $yellow "Adding identity private key to new configuration..." $nc
+                echo ""
+                privkey=$(cat /var/lib/bee/target/release/config.toml.bak | grep "identity_private_key")
+                sed -i 's/^.*identity_private_key.*$/'"$privkey"'/' /var/lib/bee/target/release/config.toml
+            fi
             echo ""
             echo -e $green "Bee successfully updated!" $nc
             echo ""
