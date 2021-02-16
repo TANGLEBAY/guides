@@ -11,12 +11,12 @@ if [ "$user" = "bee" ]; then
         checkbee=$(git pull)
         if [ "$checkbee" != "Already up to date." ]; then
             echo ""
-            echo -e $yellow "Updating rust..." $nc
+            echo -e $yellow "=> Updating rust..." $nc
             echo ""
             rustup update
             if [ -d "/var/lib/bee/bee-node/src/plugins/dashboard/frontend" ]; then
                 echo ""
-                echo -e $yellow "Updating the dashboard..." $nc
+                echo -e $yellow "=> Updating the dashboard..." $nc
                 echo ""
                 cd /var/lib/bee/bee-node
                 git submodule update --init
@@ -25,27 +25,28 @@ if [ "$user" = "bee" ]; then
                 npm run build-bee
             fi
             echo ""
-            echo -e $yellow "Updating Bee..." $nc
+            echo -e $yellow "=> Updating Bee..." $nc
             echo ""
             cd /var/lib/bee/bee-node
             cargo build --release --features dashboard
-            if [ "$1" != "noreset" ]; then
+            if [ "$1" != "-noreset" ]; then
                 echo ""
-                echo -e $yellow "Removing old database and snaphot" $nc
+                echo -e $yellow "=> Removing old database and snaphot" $nc
                 echo ""
                 rm -rf /var/lib/bee/target/release/storage /var/lib/bee/target/release/snapshots
                 echo ""
-                echo -e $yellow "Creating backup of bee configuration (/var/lib/bee/target/release/config.toml.bak)..." $nc
+                echo -e $yellow "=> Creating backup of bee configuration (/var/lib/bee/target/release/config.toml.bak)..." $nc
                 echo ""
                 mv /var/lib/bee/target/release/config.toml /var/lib/bee/target/release/config.toml.bak
                 cp -r /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml
                 echo ""
-                echo -e $yellow "Adding identity private key to new configuration..." $nc
+                echo -e $yellow "=> Adding identity private key to new configuration..." $nc
                 echo ""
                 privkey=$(cat /var/lib/bee/target/release/config.toml.bak | grep "identity_private_key")
                 sed -i 's/^.*identity_private_key.*$/'"$privkey"'/' /var/lib/bee/target/release/config.toml
             else
-                echo -e $yellow "Skipping because of noreset argument..." $nc
+                echo ""
+                echo -e $yellow "=> Skipping because of noreset argument..." $nc
             fi
             echo ""
             echo -e $green "Bee successfully updated!" $nc
