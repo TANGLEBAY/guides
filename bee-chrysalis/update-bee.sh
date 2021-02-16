@@ -29,7 +29,7 @@ if [ "$user" = "bee" ]; then
             echo ""
             cd /var/lib/bee/bee-node
             cargo build --release --features dashboard
-            if [ "$1" != "-noreset" ]; then
+            if [ "$1" != "noreset" ]; then
                 echo ""
                 echo -e $yellow "=> Removing old database and snaphot" $nc
                 echo ""
