@@ -28,6 +28,9 @@ if [ "$user" = "bee" ]; then
             echo -e $yellow "=> Updating Bee..." $nc
             echo ""
             cd /var/lib/bee/bee-node
+            if [ -f "/var/lib/bee/target/release/bee" ]; then
+            rm -rf /var/lib/bee/target/release/bee
+            fi
             cargo build --release --features dashboard
             if [ "$1" != "noreset" ]; then
                 echo ""
@@ -48,11 +51,17 @@ if [ "$user" = "bee" ]; then
                 echo ""
                 echo -e $yellow "=> Skipping because of noreset argument..." $nc
             fi
-            echo ""
-            echo -e $green "Bee successfully updated!" $nc
-            echo ""
-            echo -e $red "Dont forget to update your configuration file!" $nc
-            echo ""
+            if [ -f "/var/lib/bee/target/release/bee" ]; then
+                echo ""
+                echo -e $green "Bee successfully updated!" $nc
+                echo ""
+                echo -e $red "Dont forget to update your configuration file!" $nc
+                echo ""
+            else
+                echo ""
+                echo -e $red "Error while building bee, please check the logs and ask in Discord!" $nc
+                echo ""
+            fi
         else
             echo ""
             echo -e $green "Bee is already up2date!" $nc
