@@ -1,0 +1,25 @@
+[Unit]
+Description=Shimmer
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+LimitNOFILE=4096
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=shimmer
+PrivateDevices=yes
+PrivateTmp=yes
+ProtectSystem=full
+ProtectHome=yes
+
+User=shimmer
+Group=shimmer
+WorkingDirectory=/var/lib/goshimmer
+TimeoutSec=1200
+Restart=always
+ExecStart=/var/lib/goshimmer/shimmer -c /var/lib/goshimmer/config.json
+
+[Install]
+WantedBy=multi-user.target
+Alias=shimmer.service
