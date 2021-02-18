@@ -7,14 +7,6 @@ server {
         add_header X-Content-Type-Options "nosniff";
         add_header X-XSS-Protection "1; mode=block";
 
-        location /info {
-                proxy_pass http://localhost:8083/info;
-                proxy_set_header        Host $host;
-                proxy_set_header        X-Real-IP $remote_addr;
-                proxy_set_header        X-Forwarded-Proto $scheme;
-                proxy_set_header        X-Real-SslId $ssl_session_id;
-        }
-
         location /ws {
                 proxy_pass http://localhost:8081/ws;
                 proxy_http_version 1.1;
