@@ -47,20 +47,29 @@ if [ "$user" = "bee" ]; then
                 echo ""
                 privkey=$(cat /var/lib/bee/target/release/config.toml.bak | grep "identity_private_key")
                 sed -i 's/^.*identity_private_key.*$/'"$privkey"'/' /var/lib/bee/target/release/config.toml
+                if [ -f "/var/lib/bee/target/release/bee" ]; then
+                    echo ""
+                    echo -e $green "Bee successfully updated!" $nc
+                    echo ""
+                    echo -e $red "Dont forget to update your configuration file!" $nc
+                    echo ""
+                else
+                    echo ""
+                    echo -e $red "Error while building bee, please check the logs and ask in Discord!" $nc
+                    echo ""
+                fi
             else
                 echo ""
                 echo -e $yellow "=> Skipping because of noreset argument..." $nc
-            fi
-            if [ -f "/var/lib/bee/target/release/bee" ]; then
-                echo ""
-                echo -e $green "Bee successfully updated!" $nc
-                echo ""
-                echo -e $red "Dont forget to update your configuration file!" $nc
-                echo ""
-            else
-                echo ""
-                echo -e $red "Error while building bee, please check the logs and ask in Discord!" $nc
-                echo ""
+                if [ -f "/var/lib/bee/target/release/bee" ]; then
+                    echo ""
+                    echo -e $green "Bee successfully updated!" $nc
+                    echo ""
+                else
+                    echo ""
+                    echo -e $red "Error while building bee, please check the logs and ask in Discord!" $nc
+                    echo ""
+                fi
             fi
         else
             echo ""
