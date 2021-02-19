@@ -10,7 +10,8 @@ if [ "$user" = "bee" ]; then
         cd /var/lib/bee
         checkbee=$(git pull)
         if [ "$checkbee" != "Already up to date." ]; then
-            git reset --hard
+            git reset --hard origin/chrysalis-pt-2
+            git pull
             echo ""
             echo -e $yellow "=> Updating rust..." $nc
             echo ""
