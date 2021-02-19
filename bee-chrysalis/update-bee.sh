@@ -10,6 +10,7 @@ if [ "$user" = "bee" ]; then
         cd /var/lib/bee
         checkbee=$(git pull)
         if [ "$checkbee" != "Already up to date." ]; then
+            git reset --hard
             echo ""
             echo -e $yellow "=> Updating rust..." $nc
             echo ""
@@ -41,7 +42,7 @@ if [ "$user" = "bee" ]; then
                 echo -e $yellow "=> Creating backup of bee configuration (/var/lib/bee/target/release/config.toml.bak)..." $nc
                 echo ""
                 mv /var/lib/bee/target/release/config.toml /var/lib/bee/target/release/config.toml.bak
-                cp -r /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml
+                cp /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml
                 echo ""
                 echo -e $yellow "=> Adding identity private key to new configuration..." $nc
                 echo ""
