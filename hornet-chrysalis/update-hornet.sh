@@ -13,7 +13,7 @@ if [ "$node" = "hornet" ]; then
             echo ""
             echo -e $yellow "=> Creating backup of configuration files..." $nc
             echo ""
-            mkdir -p /var/lib/node/backup
+            mkdir -p /var/lib/$node/backup
             cp /var/lib/$node/config_chrysalis_testnet.json /var/lib/$node/backup
             cp /var/lib/$node/peering.json /var/lib/$node/backup
             echo ""
