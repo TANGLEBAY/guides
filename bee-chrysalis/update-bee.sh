@@ -3,9 +3,9 @@ red='\033[1;31m'
 green='\033[1;32m'
 yellow='\033[1;33m'
 nc='\033[0m'
-user=$(whoami)
-if [ "$user" = "bee" ]; then
-    status="$(systemctl show -p ActiveState --value bee)"
+node=$(whoami)
+if [ "$node" = "bee" ]; then
+    status="$(systemctl show -p ActiveState --value $node)"
     if [ "$status" != "active" ]; then
         cd /var/lib/bee
         checkbee=$(git pull)
@@ -21,9 +21,11 @@ if [ "$user" = "bee" ]; then
                 echo -e $yellow "=> Updating the dashboard..." $nc
                 echo ""
                 cd /var/lib/bee/bee-node
+                rm -rf /var/lib/bee/bee-node/src/plugins/dashboard/frontend/package*.json
+                git pull --recurse-submodules
+                git submodule foreach git fetch
                 git submodule update
                 cd /var/lib/bee/bee-node/src/plugins/dashboard/frontend
-                git reset --hard
                 npm install
                 npm run build-bee
             fi
@@ -50,6 +52,12 @@ if [ "$user" = "bee" ]; then
                 echo ""
                 privkey=$(cat /var/lib/bee/target/release/config.toml.bak | grep "identity_private_key")
                 sed -i 's/^.*identity_private_key.*$/'"$privkey"'/' /var/lib/bee/target/release/config.toml
+                user=$(cat /var/lib/bee/target/release/config.toml.bak | grep "user")
+                sed -i 's/^.*user.*$/'"$user"'/' /var/lib/bee/target/release/config.toml
+                passwordSalt=$(cat /var/lib/bee/target/release/config.toml.bak | grep "password_salt")
+                sed -i 's/^.*password_salt.*$/'"$passwordSalt"'/' /var/lib/bee/target/release/config.toml
+                passwordHash=$(cat /var/lib/bee/target/release/config.toml.bak | grep "password_hash")
+                sed -i 's/^.*password_hash.*$/'"$passwordHash"'/' /var/lib/bee/target/release/config.toml
                 if [ -f "/var/lib/bee/target/release/bee" ]; then
                     echo ""
                     echo -e $green "Bee successfully updated!" $nc
