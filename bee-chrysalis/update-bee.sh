@@ -23,6 +23,7 @@ if [ "$user" = "bee" ]; then
                 cd /var/lib/bee/bee-node
                 git submodule update
                 cd /var/lib/bee/bee-node/src/plugins/dashboard/frontend
+                git reset --hard
                 npm install
                 npm run build-bee
             fi
