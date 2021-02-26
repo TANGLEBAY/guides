@@ -21,9 +21,7 @@ if [ "$node" = "bee" ]; then
                 echo -e $yellow "=> Updating the dashboard..." $nc
                 echo ""
                 cd /var/lib/bee/bee-node
-                rm -rf /var/lib/bee/bee-node/src/plugins/dashboard/frontend/package*.json
                 git pull --recurse-submodules
-                git submodule foreach git fetch
                 git submodule update
                 cd /var/lib/bee/bee-node/src/plugins/dashboard/frontend
                 npm install
