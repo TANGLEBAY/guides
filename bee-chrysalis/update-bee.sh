@@ -37,7 +37,7 @@ if [ "$node" = "bee" ]; then
             cargo build --release --features dashboard
             if [ "$1" = "-noreset" ] || [ "$2" = "-noreset" ]; then
                 echo ""
-                echo -e $yellow "=> Skipping because of noreset argument..." $nc
+                echo -e $yellow "=> Skipping DB/config reset because of -noreset argument..." $nc
                 if [ -f "/var/lib/bee/target/release/bee" ]; then
                     echo ""
                     echo -e $green "Bee successfully updated!" $nc
