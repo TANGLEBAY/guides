@@ -35,7 +35,7 @@ if [ "$node" = "bee" ]; then
             rm -rf /var/lib/bee/target/release/bee
             fi
             cargo build --release --features dashboard
-            if [ "$1" = "-noreset" ] || [ "$2" = "-noreset"]; then
+            if [ "$1" = "-noreset" ] || [ "$2" = "-noreset" ]; then
                 echo ""
                 echo -e $yellow "=> Skipping because of noreset argument..." $nc
                 if [ -f "/var/lib/bee/target/release/bee" ]; then
