@@ -9,7 +9,7 @@ if [ "$node" = "bee" ]; then
     if [ "$status" != "active" ]; then
         cd /var/lib/bee
         checkbee=$(git pull)
-        if [ "$checkbee" != "Already up to date." ] || [ "$1" = "--force" ] || [ "$2" = "--force" ]; then
+        if [ "$checkbee" != "Already up to date." ] || [ "$1" = "-force" ] || [ "$2" = "-force" ]; then
             git reset --hard
             git pull
             echo ""
@@ -35,7 +35,7 @@ if [ "$node" = "bee" ]; then
             rm -rf /var/lib/bee/target/release/bee
             fi
             cargo build --release --features dashboard
-            if [ "$1" = "--noreset" ] || [ "$2" = "--noreset" ]; then
+            if [ "$1" = "-noreset" ] || [ "$2" = "-noreset" ]; then
                 echo ""
                 echo -e $yellow "=> Skipping DB/config reset because of -noreset argument..." $nc
                 if [ -f "/var/lib/bee/target/release/bee" ]; then
