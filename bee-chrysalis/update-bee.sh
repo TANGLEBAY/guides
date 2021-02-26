@@ -9,8 +9,8 @@ if [ "$node" = "bee" ]; then
     if [ "$status" != "active" ]; then
         cd /var/lib/bee
         checkbee=$(git pull)
-        if [ "$checkbee" != "Already up to date." ]; then
-            git reset --hard origin/chrysalis-pt-2
+        if [ "$checkbee" != "Already up to date." ] || [ "$1" = "-force" ] || [ "$2" = "-force" ]; then
+            git reset --hard
             git pull
             echo ""
             echo -e $yellow "=> Updating rust..." $nc
@@ -35,7 +35,19 @@ if [ "$node" = "bee" ]; then
             rm -rf /var/lib/bee/target/release/bee
             fi
             cargo build --release --features dashboard
-            if [ "$1" != "noreset" ]; then
+            if [ "$1" = "-noreset" ] || [ "$2" = "-noreset"]; then
+                echo ""
+                echo -e $yellow "=> Skipping because of noreset argument..." $nc
+                if [ -f "/var/lib/bee/target/release/bee" ]; then
+                    echo ""
+                    echo -e $green "Bee successfully updated!" $nc
+                    echo ""
+                else
+                    echo ""
+                    echo -e $red "Error while building bee, please check the logs and ask in Discord!" $nc
+                    echo ""
+                fi
+            else
                 echo ""
                 echo -e $yellow "=> Removing old database and snaphot" $nc
                 echo ""
@@ -61,18 +73,6 @@ if [ "$node" = "bee" ]; then
                     echo -e $green "Bee successfully updated!" $nc
                     echo ""
                     echo -e $red "Dont forget to update your configuration file!" $nc
-                    echo ""
-                else
-                    echo ""
-                    echo -e $red "Error while building bee, please check the logs and ask in Discord!" $nc
-                    echo ""
-                fi
-            else
-                echo ""
-                echo -e $yellow "=> Skipping because of noreset argument..." $nc
-                if [ -f "/var/lib/bee/target/release/bee" ]; then
-                    echo ""
-                    echo -e $green "Bee successfully updated!" $nc
                     echo ""
                 else
                     echo ""
