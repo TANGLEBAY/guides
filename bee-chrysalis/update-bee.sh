@@ -58,10 +58,13 @@ if [ "$node" = "bee" ]; then
                 mv /var/lib/bee/target/release/config.toml /var/lib/bee/target/release/config.toml.bak
                 cp /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml
                 echo ""
-                echo -e $yellow "=> Adding identity private key to new configuration..." $nc
+                echo -e $yellow "=> Adding previous identity private key to new configuration..." $nc
                 echo ""
                 privkey=$(cat /var/lib/bee/target/release/config.toml.bak | grep "identity_private_key")
                 sed -i 's/^.*identity_private_key.*$/'"$privkey"'/' /var/lib/bee/target/release/config.toml
+                echo ""
+                echo -e $yellow "=> Adding previous dashboard user/password to new configuration..." $nc
+                echo ""
                 user=$(cat /var/lib/bee/target/release/config.toml.bak | grep "user")
                 sed -i 's/^.*user.*$/'"$user"'/' /var/lib/bee/target/release/config.toml
                 passwordSalt=$(cat /var/lib/bee/target/release/config.toml.bak | grep "password_salt")
