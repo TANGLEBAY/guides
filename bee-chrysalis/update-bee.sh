@@ -22,7 +22,7 @@ if [ "$node" = "bee" ]; then
                 echo ""
                 cd /var/lib/bee/bee-node
                 git pull --recurse-submodules
-                git submodule update
+                git submodule update --remote
                 cd /var/lib/bee/bee-node/src/plugins/dashboard/frontend
                 npm install
                 npm run build-bee
