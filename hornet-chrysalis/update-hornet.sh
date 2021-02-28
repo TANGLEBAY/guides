@@ -28,7 +28,7 @@ if [ "$node" = "hornet" ]; then
             rm -rf /var/lib/$node/hornet
             fi
             go build -o hornet
-            if [ "$1" != "noreset" ]; then
+            if [ "$1" != "-noreset" ]; then
                 echo ""
                 echo -e $yellow "=> Removing old database and snaphot" $nc
                 echo ""
