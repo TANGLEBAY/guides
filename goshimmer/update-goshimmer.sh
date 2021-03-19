@@ -18,7 +18,7 @@ if [ "$node" = "shimmer" ]; then
             echo ""
             echo -e $yellow "=> Reset goshimmer repository..." $nc
             echo ""
-            git reset --hard
+            git reset --hard origin/master
             git pull
             echo ""
             echo -e $yellow "=> Building GoShimmer..." $nc
