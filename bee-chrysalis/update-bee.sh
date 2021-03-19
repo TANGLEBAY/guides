@@ -60,8 +60,8 @@ if [ "$node" = "bee" ]; then
                 echo ""
                 echo -e $yellow "=> Adding previous identity private key to new configuration..." $nc
                 echo ""
-                privkey=$(cat /var/lib/bee/target/release/config.toml.bak | grep "identity_private_key")
-                sed -i 's/^.*identity_private_key.*$/'"$privkey"'/' /var/lib/bee/target/release/config.toml
+                identity=$(cat /var/lib/bee/target/release/config.toml.bak | grep "identity")
+                sed -i 's/^.*identity.*$/'"$identity"'/' /var/lib/bee/target/release/config.toml
                 echo ""
                 echo -e $yellow "=> Adding previous dashboard user/password to new configuration..." $nc
                 echo ""
