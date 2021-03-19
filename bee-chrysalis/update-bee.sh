@@ -10,7 +10,7 @@ if [ "$node" = "bee" ]; then
         cd /var/lib/bee
         checkbee=$(git pull)
         if [ "$checkbee" != "Already up to date." ] || [ "$1" = "-force" ] || [ "$2" = "-force" ]; then
-            git reset --hard
+            git reset --hard origin/chrysalis-pt-2
             git pull
             echo ""
             echo -e $yellow "=> Updating rust..." $nc
