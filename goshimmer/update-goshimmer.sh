@@ -24,9 +24,9 @@ if [ "$node" = "shimmer" ]; then
             echo -e $yellow "=> Building GoShimmer..." $nc
             echo ""
             if [ -f "/var/lib/goshimmer/goshimmer" ]; then
-            rm -rf /var/lib/goshimmer/goshimmer
+                rm -rf /var/lib/goshimmer/goshimmer
             fi
-            if [ -f "/var/lib/goshimmer/build.sh" ]; then
+            if [ ! -f "/var/lib/goshimmer/build.sh" ]; then
                 cp /var/lib/goshimmer/scripts/build.sh /var/lib/goshimmer/build.sh
             fi
             source /var/lib/goshimmer/build.sh
