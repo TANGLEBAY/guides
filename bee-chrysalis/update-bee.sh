@@ -56,7 +56,7 @@ if [ "$node" = "bee" ]; then
                 echo -e $yellow "=> Creating backup of bee configuration (/var/lib/bee/target/release/config.toml.bak)..." $nc
                 echo ""
                 mv /var/lib/bee/target/release/config.toml /var/lib/bee/target/release/config.toml.bak
-                cp /var/lib/bee/bee-node/config.example.toml /var/lib/bee/target/release/config.toml
+                wget -O /var/lib/bee/target/release/config.toml https://github.com/iotaledger/bee/releases/latest/download/config.toml
                 echo ""
                 echo -e $yellow "=> Adding previous identity private key to new configuration..." $nc
                 echo ""
