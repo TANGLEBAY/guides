@@ -4,7 +4,7 @@ green='\033[1;32m'
 yellow='\033[1;33m'
 nc='\033[0m'
 node=$(whoami)
-if [ "$node" = "shimmer" ]; then
+if [ "$node" = "goshimmer" ]; then
     status="$(systemctl show -p ActiveState --value $node)"
     if [ "$status" != "active" ]; then
         cd /var/lib/goshimmer
